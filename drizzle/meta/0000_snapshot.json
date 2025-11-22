@@ -1,0 +1,1073 @@
+{
+  "id": "3f47fa8a-0843-46c1-9266-04d09a6df317",
+  "prevId": "00000000-0000-0000-0000-000000000000",
+  "version": "7",
+  "dialect": "postgresql",
+  "tables": {
+    "public.history": {
+      "name": "history",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "height": {
+          "name": "height",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 170
+        },
+        "weight": {
+          "name": "weight",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 70
+        },
+        "registerDate": {
+          "name": "registerDate",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "goal": {
+          "name": "goal",
+          "type": "goal",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'maintenance'"
+        },
+        "status": {
+          "name": "status",
+          "type": "status",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'enabled'"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "history_user_id_users_id_fk": {
+          "name": "history_user_id_users_id_fk",
+          "tableFrom": "history",
+          "tableTo": "users",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.users": {
+      "name": "users",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "email": {
+          "name": "email",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "sex": {
+          "name": "sex",
+          "type": "sex",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'undefined'"
+        },
+        "birth": {
+          "name": "birth",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.dailyWorkout": {
+      "name": "dailyWorkout",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "date": {
+          "name": "date",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.exerciseSeries": {
+      "name": "exerciseSeries",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "reps": {
+          "name": "reps",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "weight": {
+          "name": "weight",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "workoutExercises_id": {
+          "name": "workoutExercises_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "exerciseSeries_workoutExercises_id_workoutExercises_id_fk": {
+          "name": "exerciseSeries_workoutExercises_id_workoutExercises_id_fk",
+          "tableFrom": "exerciseSeries",
+          "tableTo": "workoutExercises",
+          "columnsFrom": [
+            "workoutExercises_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.exercises": {
+      "name": "exercises",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar(30)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "focusOn": {
+          "name": "focusOn",
+          "type": "muscles",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.workoutExercises": {
+      "name": "workoutExercises",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "exercises_id": {
+          "name": "exercises_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "dailyWorkout_id": {
+          "name": "dailyWorkout_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "position": {
+          "name": "position",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "workoutExercises_exercises_id_exercises_id_fk": {
+          "name": "workoutExercises_exercises_id_exercises_id_fk",
+          "tableFrom": "workoutExercises",
+          "tableTo": "exercises",
+          "columnsFrom": [
+            "exercises_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "workoutExercises_dailyWorkout_id_dailyWorkout_id_fk": {
+          "name": "workoutExercises_dailyWorkout_id_dailyWorkout_id_fk",
+          "tableFrom": "workoutExercises",
+          "tableTo": "dailyWorkout",
+          "columnsFrom": [
+            "dailyWorkout_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.aminoAacids": {
+      "name": "aminoAacids",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "food_id": {
+          "name": "food_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "tryptophan": {
+          "name": "tryptophan",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "threonine": {
+          "name": "threonine",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "isoleucine": {
+          "name": "isoleucine",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "leucine": {
+          "name": "leucine",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "lysine": {
+          "name": "lysine",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "methionine": {
+          "name": "methionine",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "cystine": {
+          "name": "cystine",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "phenylalanine": {
+          "name": "phenylalanine",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "tyrosine": {
+          "name": "tyrosine",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "valine": {
+          "name": "valine",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "arginine": {
+          "name": "arginine",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "histidine": {
+          "name": "histidine",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "alanine": {
+          "name": "alanine",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "aspartic_acid": {
+          "name": "aspartic_acid",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "glutamic_acid": {
+          "name": "glutamic_acid",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "glycine": {
+          "name": "glycine",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "proline": {
+          "name": "proline",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "serine": {
+          "name": "serine",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "aminoAacids_food_id_food_id_fk": {
+          "name": "aminoAacids_food_id_food_id_fk",
+          "tableFrom": "aminoAacids",
+          "tableTo": "food",
+          "columnsFrom": [
+            "food_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.categories": {
+      "name": "categories",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.fatty_acids": {
+      "name": "fatty_acids",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "food_id": {
+          "name": "food_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "saturated": {
+          "name": "saturated",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "monounsaturated": {
+          "name": "monounsaturated",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "polyunsaturated": {
+          "name": "polyunsaturated",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "12_0": {
+          "name": "12_0",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "14_0": {
+          "name": "14_0",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "16_0": {
+          "name": "16_0",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "18_0": {
+          "name": "18_0",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "20_0": {
+          "name": "20_0",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "22_0": {
+          "name": "22_0",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "24_0": {
+          "name": "24_0",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "14_1": {
+          "name": "14_1",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "16_1": {
+          "name": "16_1",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "18_1": {
+          "name": "18_1",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "20_1": {
+          "name": "20_1",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "18_2n6": {
+          "name": "18_2n6",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "18_3n3": {
+          "name": "18_3n3",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "20_4": {
+          "name": "20_4",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "20_5": {
+          "name": "20_5",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "22_5": {
+          "name": "22_5",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "22_6": {
+          "name": "22_6",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "18_1t": {
+          "name": "18_1t",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "18_2t": {
+          "name": "18_2t",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "fatty_acids_food_id_food_id_fk": {
+          "name": "fatty_acids_food_id_food_id_fk",
+          "tableFrom": "fatty_acids",
+          "tableTo": "food",
+          "columnsFrom": [
+            "food_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.food": {
+      "name": "food",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "categories_id": {
+          "name": "categories_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "food_categories_id_categories_id_fk": {
+          "name": "food_categories_id_categories_id_fk",
+          "tableFrom": "food",
+          "tableTo": "categories",
+          "columnsFrom": [
+            "categories_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.nutrients": {
+      "name": "nutrients",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "food_id": {
+          "name": "food_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "moisture": {
+          "name": "moisture",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "kcal": {
+          "name": "kcal",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "kJ": {
+          "name": "kJ",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "protein": {
+          "name": "protein",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "lipids": {
+          "name": "lipids",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "cholesterol": {
+          "name": "cholesterol",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "carbohydrates": {
+          "name": "carbohydrates",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "dietary_fiber": {
+          "name": "dietary_fiber",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ash": {
+          "name": "ash",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "calcium": {
+          "name": "calcium",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "magnesium": {
+          "name": "magnesium",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "manganese": {
+          "name": "manganese",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "phosphorus": {
+          "name": "phosphorus",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "iron": {
+          "name": "iron",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "sodium": {
+          "name": "sodium",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "potassium": {
+          "name": "potassium",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "copper": {
+          "name": "copper",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "zinc": {
+          "name": "zinc",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "retinol": {
+          "name": "retinol",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "re": {
+          "name": "re",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "rae": {
+          "name": "rae",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "thiamin": {
+          "name": "thiamin",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "riboflavin": {
+          "name": "riboflavin",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "pyridoxine": {
+          "name": "pyridoxine",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "niacin": {
+          "name": "niacin",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "vitamin_c": {
+          "name": "vitamin_c",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "nutrients_food_id_food_id_fk": {
+          "name": "nutrients_food_id_food_id_fk",
+          "tableFrom": "nutrients",
+          "tableTo": "food",
+          "columnsFrom": [
+            "food_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.dailyDiet": {
+      "name": "dailyDiet",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "registerDate": {
+          "name": "registerDate",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.mealFoods": {
+      "name": "mealFoods",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "food_id": {
+          "name": "food_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "meals_id": {
+          "name": "meals_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "amount": {
+          "name": "amount",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "mealFoods_meals_id_meals_id_fk": {
+          "name": "mealFoods_meals_id_meals_id_fk",
+          "tableFrom": "mealFoods",
+          "tableTo": "meals",
+          "columnsFrom": [
+            "meals_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.meals": {
+      "name": "meals",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar(20)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "daily_id": {
+          "name": "daily_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "meals_daily_id_dailyDiet_id_fk": {
+          "name": "meals_daily_id_dailyDiet_id_fk",
+          "tableFrom": "meals",
+          "tableTo": "dailyDiet",
+          "columnsFrom": [
+            "daily_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    }
+  },
+  "enums": {
+    "public.goal": {
+      "name": "goal",
+      "schema": "public",
+      "values": [
+        "lose",
+        "gain",
+        "maintenance"
+      ]
+    },
+    "public.sex": {
+      "name": "sex",
+      "schema": "public",
+      "values": [
+        "male",
+        "female",
+        "undefined"
+      ]
+    },
+    "public.status": {
+      "name": "status",
+      "schema": "public",
+      "values": [
+        "enabled",
+        "disabled"
+      ]
+    },
+    "public.muscles": {
+      "name": "muscles",
+      "schema": "public",
+      "values": [
+        "chest",
+        "back",
+        "biceps",
+        "triceps",
+        "shoulders",
+        "legs",
+        "glutes",
+        "abs",
+        "calves",
+        "forearms"
+      ]
+    }
+  },
+  "schemas": {},
+  "sequences": {},
+  "roles": {},
+  "policies": {},
+  "views": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}
